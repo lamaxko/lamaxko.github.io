@@ -55,14 +55,16 @@
     </style>
 </head>
 <body>
+    <!-- Main Wrapper -->
+    <div class="full-height center-both">
 
     <!-- Start Page -->
-    <div class="full-height center-both">
+    <div id="startPage" class="container">
         <div id="startPage" class="container">
             <form id="startForm">
                 <div class="text-center">
                     <figure class="mb-3">
-                        <h1 class="display-4">Number of Questions</h1>
+                        <h1 class="display-4">Number of Questions!</h1>
                     </figure>
                     <div class="input-group mb-3" style="max-width: 300px; margin: auto;">
                         <input type="number" class="form-control" id="numQuestions" min="1" max="50" required aria-describedby="button-addon2">
@@ -97,26 +99,25 @@
     </div>
 
 <!-- Quiz Page -->
-    <div class="full-height center-both">
-        <div class="container" id="quizPage" style="display:none;">
-        <figure class="mb-3">
-            <h1 class="display-4" id="equation"></h1>
-        </figure>
-        <div id="answerStatus" class="mb-3" style="display:none;"></div>
-        <div id="elapsedTimeDisplay" class="mb-3" style="display:none;"></div>
-        <div id="progress" class="mb-3"></div>
-        <form id="quizForm">
-            <div class="mb-3">
-                <input type="number" class="form-control" id="answer" style="max-width: 300px; margin: auto;">
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div>
+<div id="quizPage" class="container text-center" style="display:none;">
+    <figure class="mb-3">
+        <h1 class="display-4" id="equation"></h1>
+    </figure>
+    <div id="answerStatus" class="mb-3 mx-auto" style="display:none;"></div>
+    <div id="elapsedTimeDisplay" class="mb-3 mx-auto" style="display:none;"></div>
+    <div id="progress" class="mb-3 mx-auto"></div>
+    <form id="quizForm" class="mx-auto">
+        <div class="mb-3">
+            <input type="number" class="form-control mx-auto" id="answer" style="max-width: 300px;">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 </div>
 
 
+
     <!-- End Page -->
-    <div class="full-height center-both">
+    <div id="endPage" class="container" style="display:none;">
         <div class="container" id="endPage" style="display:none;">
             <div class="text-center">
                 <h1>Your Score</h1>
@@ -127,6 +128,7 @@
             </div>
         </div>
     </div>
+</div>
 
     <script>
     let startTime = null;
