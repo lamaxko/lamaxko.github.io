@@ -104,104 +104,84 @@
                 <h1>Your Score</h1>
                 <p>Correct Answers: <span id="correctAnswers"></span></p>
                 <p>Percentage: <span id="percentage"></span>%</p>
+                <p>Elapsed Time: <span id="elapsedTime"></span> seconds</p>  <!-- Display the elapsed time -->
                 <button id="retryBtn" class="btn btn-primary mt-3">Retry</button>
             </div>
         </div>
     </div>
 
     <script>
-        let counter = 0;
-        let correctAnswers = 0;
-        let totalQuestions = 0;
-        let currentAnswer = 0;
-        let selectedOperators = [];
+        let startTime = null;
+let intervalId = null;
 
-        function showPage(pageId) {
-            ['startPage', 'quizPage', 'endPage'].forEach(id => {
-                document.getElementById(id).style.display = id === pageId ? 'block' : 'none';
-            });
-        }
+// Function to get elapsed time in seconds
+function getElapsedTime() {
+    const now = Date.now();
+    const timeElapsed = Math.floor((now - startTime) / 1000);
+    return timeElapsed;
+}
 
-        function generateEquation() {
-            if (selectedOperators.length === 0) return;
-            
-            const num1 = Math.floor(Math.random() * 100);
-            const num2 = Math.floor(Math.random() * 100);
-            const operator = selectedOperators[Math.floor(Math.random() * selectedOperators.length)];
-            
-        
-            switch (operator) {
-                case '+':
-                    document.getElementById('equation').innerText = `${num1} + ${num2} = ?`;
-                    currentAnswer = num1 + num2;
-                    break;
-                case '-':
-                    document.getElementById('equation').innerText = `${num1} - ${num2} = ?`;
-                    currentAnswer = num1 - num2;
-                    break;
-                case '*':
-                    document.getElementById('equation').innerText = `${num1} × ${num2} = ?`;
-                    currentAnswer = num1 * num2;
-                    break;
-                case '/':
-                    if (num2 !== 0) {
-                        document.getElementById('equation').innerText = `${num1} ÷ ${num2} = ?`;
-                        currentAnswer = Math.round(num1 / num2);
-                    } else {
-                        generateEquation(); // Re-generate equation to avoid division by zero
-                    }
-                    break;
-                default:
-                    console.error('Unknown operator');
-            }
-        }
-        
+document.getElementById('startForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    totalQuestions = parseInt(document.getElementById('numQuestions').value);
+    selectedOperators = [];
+    if (document.getElementById('addition').checked) selectedOperators.push('+');
+    if (document.getElementById('subtraction').checked) selectedOperators.push('-');
+    if (document.getElementById('multiplication').checked) selectedOperators.push('*');
+    if (document.getElementById('division').checked) selectedOperators.push('/');
 
-        document.getElementById('startForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            totalQuestions = parseInt(document.getElementById('numQuestions').value);
-            selectedOperators = [];
-            if (document.getElementById('addition').checked) selectedOperators.push('+');
-            if (document.getElementById('subtraction').checked) selectedOperators.push('-');
-            if (document.getElementById('multiplication').checked) selectedOperators.push('*');
-            if (document.getElementById('division').checked) selectedOperators.push('/');
-            showPage('quizPage');
-            generateEquation();
-            counter = 0;
-            correctAnswers = 0;
-            document.getElementById('answer').focus();
-        });
+    if (selectedOperators.length === 0) {
+        alert("Please choose at least one operator.");
+        return;
+    }
 
-        document.getElementById('quizForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const userAnswer = parseFloat(document.getElementById('answer').value);
-            if (userAnswer === currentAnswer) {
-                correctAnswers++;
-            }
-            counter++;
-            document.getElementById('progress').innerText = `${counter}/${totalQuestions}`;
-            if (counter < totalQuestions) {
-                generateEquation();
-                document.getElementById('answer').value = '';
-                document.getElementById('answer').focus();
-            } else {
-                showPage('endPage');
-                const percentage = ((correctAnswers / totalQuestions) * 100).toFixed(2);
-                document.getElementById('correctAnswers').innerText = correctAnswers;
-                document.getElementById('percentage').innerText = percentage;
-            }
-        });
+    showPage('quizPage');
+    generateEquation();
 
-        document.getElementById('retryBtn').addEventListener('click', function() {
-            showPage('startPage');
-            document.getElementById('numQuestions').value = '';
-            counter = 0;
-            correctAnswers = 0;
-            totalQuestions = 0;
-            currentAnswer = 0;
-        });
+    // Start the timer
+    startTime = Date.now();
 
-        showPage('startPage');
+    counter = 0;
+    correctAnswers = 0;
+    document.getElementById('answer').focus();
+});
+
+document.getElementById('quizForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const userAnswer = parseFloat(document.getElementById('answer').value);
+    if (userAnswer === currentAnswer) {
+        correctAnswers++;
+    }
+    counter++;
+    document.getElementById('progress').innerText = `${counter}/${totalQuestions}`;
+    if (counter < totalQuestions) {
+        generateEquation();
+        document.getElementById('answer').value = '';
+        document.getElementById('answer').focus();
+    } else {
+        // Stop the timer and show elapsed time
+        const elapsedTime = getElapsedTime();
+        document.getElementById('elapsedTime').innerText = elapsedTime;
+
+        showPage('endPage');
+        const percentage = ((correctAnswers / totalQuestions) * 100).toFixed(2);
+        document.getElementById('correctAnswers').innerText = correctAnswers;
+        document.getElementById('percentage').innerText = percentage;
+    }
+});
+
+document.getElementById('retryBtn').addEventListener('click', function() {
+    // Reset everything
+    showPage('startPage');
+    document.getElementById('numQuestions').value = '';
+    counter = 0;
+    correctAnswers = 0;
+    totalQuestions = 0;
+    currentAnswer = 0;
+    document.getElementById('elapsedTime').innerText = '0'; // Reset elapsed time
+});
+
+showPage('startPage');
     </script>
 
 </body>
