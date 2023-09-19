@@ -93,28 +93,25 @@
         </div>
     </div>
 
-    <!-- Quiz Page -->
-    <div id="quizPage" class="container full-height" style="display:none;">
-        <div class="row center-both">
-        <div class="row justify-content-center align-items-center" style="height: 100vh;">
-            <div class="text-center">
-                <figure class="mb-3">
-                    <h1 class="display-4" id="equation"></h1>
-                </figure>
-                <!-- New Elements for Time and Answer Correctness -->
-                <div id="answerStatus" class="mb-3"></div> <!-- To display if the answer is correct or incorrect -->
-                <div id="elapsedTimeDisplay" class="mb-3"></div> <!-- To display the elapsed time -->
+<!-- Quiz Page -->
+<div id="quizPage" class="container full-height center-both" style="display:none;">
+    <div class="text-center">
+        <figure class="mb-3">
+            <h1 class="display-4" id="equation"></h1>
+        </figure>
+        <!-- New Elements for Time and Answer Correctness -->
+        <div id="answerStatus" class="mb-3"></div> <!-- To display if the answer is correct or incorrect -->
+        <div id="elapsedTimeDisplay" class="mb-3"></div> <!-- To display the elapsed time -->
+        <div id="progress" class="mb-3"></div>
+        <form id="quizForm">
+            <div class="mb-3">
+                <input type="number" class="form-control" id="answer" style="max-width: 300px; margin: auto;">
             </div>
-                <div id="progress" class="mb-3"></div>
-                <form id="quizForm">
-                    <div class="mb-3">
-                        <input type="number" class="form-control" id="answer" style="max-width: 300px; margin: auto;">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-        </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
     </div>
+</div>
+
 
     <!-- End Page -->
     <div id="endPage" class="container" style="display:none;">
