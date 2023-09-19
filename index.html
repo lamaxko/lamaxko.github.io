@@ -203,26 +203,6 @@
         });
 
         showPage('startPage');
-
-         // On form submission, check if at least one operator is selected
-         window.addEventListener('DOMContentLoaded', (event) => {
-            const form = document.getElementById('startForm');
-            form.addEventListener('submit', function(e) {
-                const checkboxes = document.querySelectorAll('.btn-check');
-                let atLeastOneChecked = false;
-                
-                checkboxes.forEach((checkbox) => {
-                    if (checkbox.checked) {
-                        atLeastOneChecked = true;
-                    }
-                });
-
-                if (!atLeastOneChecked) {
-                    alert('Please select at least one operator.');
-                    e.preventDefault();
-                }
-            });
-        });
     </script>
 
 </body>
