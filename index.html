@@ -17,7 +17,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-        }        
+        }              
 
         .operator-wrapper {
             display: flex;
@@ -57,8 +57,8 @@
 <body>
 
     <!-- Start Page -->
-    <div id="startPage" class="container full-height center-both">
-        <div class="row">
+    <div class="full-height center-both">
+        <div id="startPage" class="container">
             <form id="startForm">
                 <div class="text-center">
                     <figure class="mb-3">
@@ -97,8 +97,8 @@
     </div>
 
 <!-- Quiz Page -->
-<div id="quizPage" class="container full-height center-both" style="display:none;">
-    <div id="quizContent" class="text-center">
+    <div class="full-height center-both">
+        <div id="quizPage" class="container" style="display:none;">
         <figure class="mb-3">
             <h1 class="display-4" id="equation"></h1>
         </figure>
@@ -116,8 +116,8 @@
 
 
     <!-- End Page -->
+<div class="full-height center-both">
     <div id="endPage" class="container" style="display:none;">
-        <div class="row justify-content-center align-items-center" style="height: 100vh;">
             <div class="text-center">
                 <h1>Your Score</h1>
                 <p>Correct Answers: <span id="correctAnswers"></span></p>
