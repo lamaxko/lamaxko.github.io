@@ -48,8 +48,9 @@
                     <figure class="mb-3">
                         <h1 class="display-4">Number of Questions</h1>
                     </figure>
-                    <div class="mb-3">
-                        <input type="number" class="form-control" id="numQuestions" min="1" max="50" required style="max-width: 300px; margin: auto;">
+                    <div class="input-group mb-3">
+                        <input type="number" class="form-control" id="numQuestions" min="1" max="50" required aria-describedby="button-addon2" style="max-width: 300px;">
+                        <button class="btn btn-outline-secondary" type="button" id="transparencyToggle" aria-describedby="button-addon2">Transparency Mode</button>
                     </div>
                     <div class="operator-wrapper">
                         <div class="operator-row">
@@ -113,6 +114,7 @@
     <script>
     let startTime = null;
     let intervalId = null;
+    let transparencyMode = false;
     let totalQuestions, selectedOperators, counter, correctAnswers, currentAnswer;
 
     // Function to get elapsed time in seconds
@@ -121,6 +123,18 @@
         const timeElapsed = Math.floor((now - startTime) / 1000);
         return timeElapsed;
     }
+
+    // Function to toggle transparency mode
+    document.getElementById('transparencyToggle').addEventListener('click', function() {
+        transparencyMode = !transparencyMode; // Toggle the state
+        if (transparencyMode) {
+            this.classList.add("btn-outline-primary"); // Change button color when enabled
+            this.classList.remove("btn-outline-secondary");
+        } else {
+            this.classList.remove("btn-outline-primary");
+            this.classList.add("btn-outline-secondary"); // Change back when disabled
+        }
+    });
 
     function showPage(pageId) {
         document.getElementById('startPage').style.display = 'none';
@@ -193,6 +207,11 @@
         const userAnswer = parseFloat(document.getElementById('answer').value);
         if (userAnswer === currentAnswer) {
             correctAnswers++;
+        }
+        if (transparencyMode) {
+            const elapsedTime = getElapsedTime();
+            const correct = (userAnswer === currentAnswer) ? "Correct" : "Incorrect";
+            alert(`Your answer is ${correct}. Time taken: ${elapsedTime} seconds.`);
         }
         counter++;
         document.getElementById('progress').innerText = `${counter}/${totalQuestions}`;
