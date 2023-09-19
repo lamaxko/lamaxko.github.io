@@ -6,21 +6,18 @@
     <title>Math Quiz</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* Centering the inner div within the outer div */
         .operator-wrapper {
             display: flex;
             justify-content: center;
             align-items: center;
+            margin-bottom: 20px;  /* Add vertical space */
         }
-        /* Creating a horizontal row for the operators */
         .operator-row {
             display: flex;
         }
-        /* Adding some space between each operator button */
         .operator-row > div {
-            margin-right: 10px; /* Adjust as needed */
+            margin-right: 10px;
         }
-        /* Remove margin from the last child */
         .operator-row > div:last-child {
             margin-right: 0;
         }
@@ -206,6 +203,26 @@
         });
 
         showPage('startPage');
+
+         // On form submission, check if at least one operator is selected
+         window.addEventListener('DOMContentLoaded', (event) => {
+            const form = document.getElementById('startForm');
+            form.addEventListener('submit', function(e) {
+                const checkboxes = document.querySelectorAll('.btn-check');
+                let atLeastOneChecked = false;
+                
+                checkboxes.forEach((checkbox) => {
+                    if (checkbox.checked) {
+                        atLeastOneChecked = true;
+                    }
+                });
+
+                if (!atLeastOneChecked) {
+                    alert('Please select at least one operator.');
+                    e.preventDefault();
+                }
+            });
+        });
     </script>
 
 </body>
