@@ -64,7 +64,7 @@
             <form id="startForm">
                 <div class="text-center">
                     <figure class="mb-3">
-                        <h1 class="display-4">Number of Questions!</h1>
+                        <h1 class="display-4">Number of Questions</h1>
                     </figure>
                     <div class="input-group mb-3" style="max-width: 300px; margin: auto;">
                         <input type="number" class="form-control" id="numQuestions" min="1" max="50" required aria-describedby="button-addon2">
@@ -118,16 +118,15 @@
 
     <!-- End Page -->
     <div id="endPage" class="container" style="display:none;">
-        <div class="container" id="endPage" style="display:none;">
-            <div class="text-center">
-                <h1>Your Score</h1>
-                <p>Correct Answers: <span id="correctAnswers"></span></p>
-                <p>Percentage: <span id="percentage"></span>%</p>
-                <p>Elapsed Time: <span id="elapsedTime"></span> seconds</p>  <!-- Display the elapsed time -->
-                <button id="retryBtn" class="btn btn-primary mt-3">Retry</button>
-            </div>
+        <div class="text-center">
+            <h1>Your Score</h1>
+            <p>Correct Answers: <span id="correctAnswers"></span></p>
+            <p>Percentage: <span id="percentage"></span>%</p>
+            <p>Elapsed Time: <span id="elapsedTime"></span> seconds</p>  <!-- Display the elapsed time -->
+            <button id="retryBtn" class="btn btn-primary mt-3">Retry</button>
         </div>
-    </div>
+</div>
+
 </div>
 
     <script>
@@ -269,8 +268,8 @@
             // Stop the timer and show elapsed time
             const elapsedTime = getElapsedTime();
             document.getElementById('elapsedTime').innerText = elapsedTime;
-
-            showPage('endPage');
+        
+            showPage('endPage');  // Make sure 'endPage' refers to the unique ID
             const percentage = ((correctAnswers / totalQuestions) * 100).toFixed(2);
             document.getElementById('correctAnswers').innerText = correctAnswers;
             document.getElementById('percentage').innerText = percentage;
