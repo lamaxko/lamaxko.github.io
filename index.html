@@ -84,11 +84,37 @@
         }
 
         function generateEquation() {
-            const num1 = Math.floor(Math.random() * 50);
-            const num2 = Math.floor(Math.random() * 50);
-            document.getElementById('equation').innerText = `${num1} + ${num2} = ?`;
-            currentAnswer = num1 + num2;
+            const num1 = Math.floor(Math.random() * 100);
+            const num2 = Math.floor(Math.random() * 100);
+            const operators = ['+', '-', '*', '/'];
+            const operator = operators[Math.floor(Math.random() * operators.length)];
+        
+            switch (operator) {
+                case '+':
+                    document.getElementById('equation').innerText = `${num1} + ${num2} = ?`;
+                    currentAnswer = num1 + num2;
+                    break;
+                case '-':
+                    document.getElementById('equation').innerText = `${num1} - ${num2} = ?`;
+                    currentAnswer = num1 - num2;
+                    break;
+                case '*':
+                    document.getElementById('equation').innerText = `${num1} × ${num2} = ?`;
+                    currentAnswer = num1 * num2;
+                    break;
+                case '/':
+                    if (num2 !== 0) {
+                        document.getElementById('equation').innerText = `${num1} ÷ ${num2} = ?`;
+                        currentAnswer = Math.round(num1 / num2);
+                    } else {
+                        generateEquation(); // Re-generate equation to avoid division by zero
+                    }
+                    break;
+                default:
+                    console.error('Unknown operator');
+            }
         }
+        
 
         document.getElementById('startForm').addEventListener('submit', function(event) {
             event.preventDefault();
