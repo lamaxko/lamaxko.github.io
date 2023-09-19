@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,8 +9,13 @@
         .operator-grid {
             display: grid;
             grid-template-columns: auto auto; /* Create two columns */
-            gap: 10px 10px; /* Gap between rows and columns */
+            row-gap: 0; /* Removed vertical gap */
+            column-gap: 10px; /* Horizontal gap */
         }
+        .operator-grid > div {
+            margin: 0; /* Explicitly remove any margins */
+        }
+        /* Existing styles */
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
@@ -59,7 +64,6 @@
                             <label class="btn btn-outline-primary" for="division">÷</label>
                         </div>
                     </div>
-                    
                     <button type="submit" class="btn btn-primary">Start Quiz</button>
                 </div>
             </form>
