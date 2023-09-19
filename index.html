@@ -256,7 +256,6 @@
         if (transparencyMode) {
             const elapsedTime = getElapsedTime();
             const correct = (userAnswer === currentAnswer) ? "Correct" : "Incorrect";
-            alert(`Your answer is ${correct}. Time taken: ${elapsedTime} seconds.`);
         }
         counter++;
         document.getElementById('progress').innerText = `${counter}/${totalQuestions}`;
