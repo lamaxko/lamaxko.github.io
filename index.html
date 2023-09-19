@@ -11,9 +11,13 @@
     <div id="startPage" class="container">
         <div class="row justify-content-center align-items-center" style="height: 100vh;">
             <form id="startForm">
+                <div class="text-center">
+                    <figure class="mb-3">
+                        <h1 class="display-4">Number of Questions</h1>
+                    </figure>
+                </div>
                 <div class="mb-3">
-                    <label for="numQuestions" class="form-label">Number of Questions</label>
-                    <input type="number" class="form-control" id="numQuestions" min="1" max="50" required>
+                    <input type="number" class="form-control" id="numQuestions" min="1" max="50" required style="max-width: 300px; margin: auto;">
                 </div>
                 <button type="submit" class="btn btn-primary">Start Quiz</button>
             </form>
