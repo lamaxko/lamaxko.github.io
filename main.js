@@ -45,6 +45,7 @@ if (document.getElementById('quizForm')) {
         // Update progress
         document.getElementById('progress').innerText = `${counter}/${totalQuestions}`;
 
+
         if (counter < totalQuestions) {
             generateEquation();
             document.getElementById('answer').value = '';
@@ -71,7 +72,7 @@ if (document.getElementById('correctAnswers')) {
         // Set up the Retry button
         document.getElementById('retryBtn').addEventListener('click', function() {
             // Redirect to the start page
-            window.location.href = 'start.html';
+            window.location.href = 'index.html';
         });
     };
 }
