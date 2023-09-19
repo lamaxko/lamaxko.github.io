@@ -1,6 +1,7 @@
 // main.js
 
 // Declare global variables
+// Declare global variables
 let counter = 0;
 let totalQuestions = 0;
 let correctAnswers = 0;
