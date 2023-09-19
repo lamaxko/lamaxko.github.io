@@ -171,13 +171,14 @@
         toggleExtraInfo(); // Update the visibility of the extra information
         
         if (transparencyMode) {
-            this.classList.remove("btn-outline-primary"); // Assuming the button starts with this class
-            this.classList.add("btn-outline-success");  // Changed color when enabled
+            this.classList.remove("btn-outline-primary"); // Remove initial class
+            this.classList.add("btn-outline-success");  // Add new class when enabled
         } else {
-            this.classList.remove("btn-outline-success");  // Revert to original
-            this.classList.add("btn-outline-primary"); // Reverting back to the initial class
+            this.classList.remove("btn-outline-success");  // Revert to original class
+            this.classList.add("btn-outline-primary"); // Add back the initial class
         }
     });
+
 
 
 
