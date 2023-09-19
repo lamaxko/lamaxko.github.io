@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Math Quiz</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .operator-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;  /* Add vertical space */
+        }
+        .operator-row {
+            display: flex;
+        }
+        .operator-row > div {
+            margin-right: 10px;
+        }
+        .operator-row > div:last-child {
+            margin-right: 0;
+        }
+        /* Existing styles */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .btn {
+                padding: 14px 28px;
+                font-size: 18px;
+            }
+            .form-control {
+                font-size: 18px;
+                height: auto;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Start Page -->
+    <div id="startPage" class="container">
+        <div class="row justify-content-center align-items-center" style="height: 100vh;">
+            <form id="startForm">
+                <div class="text-center">
+                    <figure class="mb-3">
+                        <h1 class="display-4">Number of Questions</h1>
+                    </figure>
+                    <div class="mb-3">
+                        <input type="number" class="form-control" id="numQuestions" min="1" max="50" required style="max-width: 300px; margin: auto;">
+                    </div>
+                    <div class="operator-wrapper">
+                        <div class="operator-row">
+                            <div>
+                                <input type="checkbox" class="btn-check" id="addition" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="addition">+</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" class="btn-check" id="subtraction" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="subtraction">-</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" class="btn-check" id="multiplication" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="multiplication">×</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" class="btn-check" id="division" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="division">÷</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Start Quiz</button>
+                </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Quiz Page -->
+    <div id="quizPage" class="container" style="display:none;">
+        <div class="row justify-content-center align-items-center" style="height: 100vh;">
+            <div class="text-center">
+                <figure class="mb-3">
+                    <h1 class="display-4" id="equation"></h1>
+                </figure>
+                <div id="progress" class="mb-3"></div>
+                <form id="quizForm">
+                    <div class="mb-3">
+                        <input type="number" class="form-control" id="answer" style="max-width: 300px; margin: auto;">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- End Page -->
+    <div id="endPage" class="container" style="display:none;">
+        <div class="row justify-content-center align-items-center" style="height: 100vh;">
+            <div class="text-center">
+                <h1>Your Score</h1>
+                <p>Correct Answers: <span id="correctAnswers"></span></p>
+                <p>Percentage: <span id="percentage"></span>%</p>
+                <p>Elapsed Time: <span id="elapsedTime"></span> seconds</p>  <!-- Display the elapsed time -->
+                <button id="retryBtn" class="btn btn-primary mt-3">Retry</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    let startTime = null;
+    let intervalId = null;
+    let totalQuestions, selectedOperators, counter, correctAnswers, currentAnswer;
+
+    // Function to get elapsed time in seconds
+    function getElapsedTime() {
+        const now = Date.now();
+        const timeElapsed = Math.floor((now - startTime) / 1000);
+        return timeElapsed;
+    }
+
+    function showPage(pageId) {
+        document.getElementById('startPage').style.display = 'none';
+        document.getElementById('quizPage').style.display = 'none';
+        document.getElementById('endPage').style.display = 'none';
+        document.getElementById(pageId).style.display = 'block';
+    }
+    
+    function generateEquation() {
+        if (selectedOperators.length === 0) return;
+        
+        const num1 = Math.floor(Math.random() * 100);
+        const num2 = Math.floor(Math.random() * 100);
+        const operator = selectedOperators[Math.floor(Math.random() * selectedOperators.length)];
+        
+
+        switch (operator) {
+            case '+':
+                document.getElementById('equation').innerText = `${num1} + ${num2} = ?`;
+                currentAnswer = num1 + num2;
+                break;
+            case '-':
+                document.getElementById('equation').innerText = `${num1} - ${num2} = ?`;
+                currentAnswer = num1 - num2;
+                break;
+            case '*':
+                document.getElementById('equation').innerText = `${num1} × ${num2} = ?`;
+                currentAnswer = num1 * num2;
+                break;
+            case '/':
+                if (num2 !== 0) {
+                    document.getElementById('equation').innerText = `${num1} ÷ ${num2} = ?`;
+                    currentAnswer = Math.round(num1 / num2);
+                } else {
+                    generateEquation(); // Re-generate equation to avoid division by zero
+                }
+                break;
+            default:
+                console.error('Unknown operator');
+        }
+    }
+
+    document.getElementById('startForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        totalQuestions = parseInt(document.getElementById('numQuestions').value);
+        selectedOperators = [];
+        if (document.getElementById('addition').checked) selectedOperators.push('+');
+        if (document.getElementById('subtraction').checked) selectedOperators.push('-');
+        if (document.getElementById('multiplication').checked) selectedOperators.push('*');
+        if (document.getElementById('division').checked) selectedOperators.push('/');
+
+        if (selectedOperators.length === 0) {
+            alert("Please choose at least one operator.");
+            return;
+        }
+
+        showPage('quizPage');
+        generateEquation();
+
+        // Start the timer
+        startTime = Date.now();
+
+        counter = 0;
+        correctAnswers = 0;
+        document.getElementById('answer').focus();
+    });
+
+    document.getElementById('quizForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const userAnswer = parseFloat(document.getElementById('answer').value);
+        if (userAnswer === currentAnswer) {
+            correctAnswers++;
+        }
+        counter++;
+        document.getElementById('progress').innerText = `${counter}/${totalQuestions}`;
+        if (counter < totalQuestions) {
+            generateEquation();
+            document.getElementById('answer').value = '';
+            document.getElementById('answer').focus();
+        } else {
+            // Stop the timer and show elapsed time
+            const elapsedTime = getElapsedTime();
+            document.getElementById('elapsedTime').innerText = elapsedTime;
+
+            showPage('endPage');
+            const percentage = ((correctAnswers / totalQuestions) * 100).toFixed(2);
+            document.getElementById('correctAnswers').innerText = correctAnswers;
+            document.getElementById('percentage').innerText = percentage;
+        }
+    });
+
+    document.getElementById('retryBtn').addEventListener('click', function() {
+        // Reset everything
+        showPage('startPage');
+        document.getElementById('numQuestions').value = '';
+        counter = 0;
+        correctAnswers = 0;
+        totalQuestions = 0;
+        currentAnswer = 0;
+        document.getElementById('elapsedTime').innerText = '0'; // Reset elapsed time
+    });
+
+    showPage('startPage');
+        </script>
+
+</body>
+</html>
