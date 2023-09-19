@@ -72,7 +72,7 @@ if (document.getElementById('correctAnswers')) {
         // Set up the Retry button
         document.getElementById('retryBtn').addEventListener('click', function() {
             // Redirect to the start page
-            window.location.href = 'index.html';
+            window.location.href = 'start.html';
         });
     };
 }
