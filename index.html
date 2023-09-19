@@ -35,6 +35,13 @@
                     <div class="mb-3">
                         <input type="number" class="form-control" id="numQuestions" min="1" max="50" required style="max-width: 300px; margin: auto;">
                     </div>
+                    <label>Operators:</label>
+                    <div>
+                        <input type="checkbox" id="addition" checked> +
+                        <input type="checkbox" id="subtraction" checked> -
+                        <input type="checkbox" id="multiplication" checked> *
+                        <input type="checkbox" id="division" checked> /
+                    </div>
                     <button type="submit" class="btn btn-primary">Start Quiz</button>
                 </div>
             </form>
@@ -76,6 +83,7 @@
         let correctAnswers = 0;
         let totalQuestions = 0;
         let currentAnswer = 0;
+        let selectedOperators = [];
 
         function showPage(pageId) {
             ['startPage', 'quizPage', 'endPage'].forEach(id => {
@@ -84,10 +92,12 @@
         }
 
         function generateEquation() {
+            if (selectedOperators.length === 0) return;
+            
             const num1 = Math.floor(Math.random() * 100);
             const num2 = Math.floor(Math.random() * 100);
-            const operators = ['+', '-', '*', '/'];
-            const operator = operators[Math.floor(Math.random() * operators.length)];
+            const operator = selectedOperators[Math.floor(Math.random() * selectedOperators.length)];
+            
         
             switch (operator) {
                 case '+':
@@ -119,6 +129,11 @@
         document.getElementById('startForm').addEventListener('submit', function(event) {
             event.preventDefault();
             totalQuestions = parseInt(document.getElementById('numQuestions').value);
+            selectedOperators = [];
+            if (document.getElementById('addition').checked) selectedOperators.push('+');
+            if (document.getElementById('subtraction').checked) selectedOperators.push('-');
+            if (document.getElementById('multiplication').checked) selectedOperators.push('*');
+            if (document.getElementById('division').checked) selectedOperators.push('/');
             showPage('quizPage');
             generateEquation();
             counter = 0;
