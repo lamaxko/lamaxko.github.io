@@ -7,17 +7,17 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .full-height {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        
-        .center-both {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }              
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .center-both {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }  
 
         .operator-wrapper {
             display: flex;
@@ -62,7 +62,7 @@
             <form id="startForm">
                 <div class="text-center">
                     <figure class="mb-3">
-                        <h1 class="display-4">Number of Questions</h1>
+                        <h1 class="display-4">Number of Questions!</h1>
                     </figure>
                     <div class="input-group mb-3" style="max-width: 300px; margin: auto;">
                         <input type="number" class="form-control" id="numQuestions" min="1" max="50" required aria-describedby="button-addon2">
@@ -98,7 +98,7 @@
 
 <!-- Quiz Page -->
     <div class="full-height center-both">
-        <div id="quizPage" class="container" style="display:none;">
+        <div class="container" id="quizPage" style="display:none;">
         <figure class="mb-3">
             <h1 class="display-4" id="equation"></h1>
         </figure>
@@ -116,8 +116,8 @@
 
 
     <!-- End Page -->
-<div class="full-height center-both">
-    <div id="endPage" class="container" style="display:none;">
+    <div class="full-height center-both">
+        <div class="container" id="endPage" style="display:none;">
             <div class="text-center">
                 <h1>Your Score</h1>
                 <p>Correct Answers: <span id="correctAnswers"></span></p>
