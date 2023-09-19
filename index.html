@@ -172,13 +172,14 @@
         toggleExtraInfo(); // Update the visibility of the extra information
 
         if (transparencyMode) {
-            this.classList.remove("btn-outline-primary"); // Remove initial class
-            this.classList.add("btn-outline-success");  // Add new class when enabled
+            this.classList.remove("btn-outline-primary"); // Remove outline class
+            this.classList.add("btn-primary"); // Add filled class when enabled
         } else {
-            this.classList.remove("btn-outline-success");  // Revert to the previous class
-            this.classList.add("btn-outline-primary"); // Add back the initial class
+            this.classList.remove("btn-primary");  // Remove filled class
+            this.classList.add("btn-outline-primary"); // Add back the outline class
         }
     });
+
 
     // Fix for the operator buttons
     document.querySelectorAll('.operator-check').forEach((checkbox) => {
