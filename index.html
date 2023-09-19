@@ -76,22 +76,22 @@
                     <div class="operator-wrapper">
                         <div class="operator-row">
                             <div>
-                                <input type="checkbox" class="btn-check" id="addition" autocomplete="off">
-                                <label class="btn btn-outline-primary" for="addition">+</label>
+                                <input type="checkbox" class="btn-check operator-check" id="addition" autocomplete="off">
+                                <label class="btn btn-outline-primary operator-label" for="addition">+</label>
                             </div>
                             <div>
-                                <input type="checkbox" class="btn-check" id="subtraction" autocomplete="off">
-                                <label class="btn btn-outline-primary" for="subtraction">-</label>
+                                <input type="checkbox" class="btn-check operator-check" id="subtraction" autocomplete="off">
+                                <label class="btn btn-outline-primary operator-label" for="subtraction">-</label>
                             </div>
                             <div>
-                                <input type="checkbox" class="btn-check" id="multiplication" autocomplete="off">
-                                <label class="btn btn-outline-primary" for="multiplication">×</label>
+                                <input type="checkbox" class="btn-check operator-check" id="multiplication" autocomplete="off">
+                                <label class="btn btn-outline-primary operator-label" for="multiplication">×</label>
                             </div>
                             <div>
-                                <input type="checkbox" class="btn-check" id="division" autocomplete="off">
-                                <label class="btn btn-outline-primary" for="division">÷</label>
+                                <input type="checkbox" class="btn-check operator-check" id="division" autocomplete="off">
+                                <label class="btn btn-outline-primary operator-label" for="division">÷</label>
                             </div>
-                        </div>
+                        </div>                        
                     </div>
                     <div class="mb-3">
                     <button type="submit" class="btn btn-primary">Start Quiz</button>
@@ -163,20 +163,35 @@
     // Function to toggle transparency mode
     document.getElementById('transparencyToggle').addEventListener('click', function() {
         transparencyMode = !transparencyMode;
+
         // Show or hide elements based on the state
         const displayStyle = transparencyMode ? 'block' : 'none';
         document.getElementById('answerStatus').style.display = displayStyle;
         document.getElementById('elapsedTimeDisplay').style.display = displayStyle;
 
         toggleExtraInfo(); // Update the visibility of the extra information
-        
+
         if (transparencyMode) {
             this.classList.remove("btn-outline-primary"); // Remove initial class
             this.classList.add("btn-outline-success");  // Add new class when enabled
         } else {
-            this.classList.remove("btn-outline-success");  // Revert to original class
+            this.classList.remove("btn-outline-success");  // Revert to the previous class
             this.classList.add("btn-outline-primary"); // Add back the initial class
         }
+    });
+
+    // Fix for the operator buttons
+    document.querySelectorAll('.operator-check').forEach((checkbox) => {
+        checkbox.addEventListener('change', function() {
+            const correspondingLabel = document.querySelector(`label[for="${this.id}"]`);
+            if (this.checked) {
+                correspondingLabel.classList.remove("btn-outline-primary");
+                correspondingLabel.classList.add("btn-primary");
+            } else {
+                correspondingLabel.classList.remove("btn-primary");
+                correspondingLabel.classList.add("btn-outline-primary");
+            }
+        });
     });
 
 
