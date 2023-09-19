@@ -48,9 +48,9 @@
                     <figure class="mb-3">
                         <h1 class="display-4">Number of Questions</h1>
                     </figure>
-                    <div class="input-group mb-3">
-                        <input type="number" class="form-control" id="numQuestions" min="1" max="50" required aria-describedby="button-addon2" style="max-width: 300px;">
-                        <button class="btn btn-outline-secondary" type="button" id="transparencyToggle" aria-describedby="button-addon2">Transparency Mode</button>
+                    <div class="input-group mb-3" style="max-width: 300px;">
+                        <input type="number" class="form-control" id="numQuestions" min="1" max="50" required aria-describedby="button-addon2">
+                        <button class="btn btn-outline-primary" type="button" id="transparencyToggle" aria-describedby="button-addon2">Transparency Mode</button>
                     </div>
                     <div class="operator-wrapper">
                         <div class="operator-row">
@@ -128,13 +128,14 @@
     document.getElementById('transparencyToggle').addEventListener('click', function() {
         transparencyMode = !transparencyMode; // Toggle the state
         if (transparencyMode) {
-            this.classList.add("btn-outline-primary"); // Change button color when enabled
             this.classList.remove("btn-outline-secondary");
+            this.classList.add("btn-outline-success");  // Changed color when enabled
         } else {
-            this.classList.remove("btn-outline-primary");
-            this.classList.add("btn-outline-secondary"); // Change back when disabled
+            this.classList.remove("btn-outline-success");  // Revert to original
+            this.classList.add("btn-outline-primary");
         }
     });
+
 
     function showPage(pageId) {
         document.getElementById('startPage').style.display = 'none';
