@@ -19,6 +19,12 @@
                 height: auto;
                 padding: 12px;
             }
+            .operator-grid {
+                display: grid;
+                grid-template-columns: auto auto; /* Create two columns */
+                gap: 10px 10px; /* Gap between rows and columns */
+            }
+            
         }
     </style>
 </head>
@@ -36,20 +42,25 @@
                         <input type="number" class="form-control" id="numQuestions" min="1" max="50" required style="max-width: 300px; margin: auto;">
                     </div>
                     <label>Operators:</label>
-                    <div>
-                        <input type="checkbox" class="btn-check" id="addition" autocomplete="off">
-                        <label class="btn btn-outline-primary" for="btn-check-outlined">+</label><br>
-                        
-                        <input type="checkbox" class="btn-check" id="subtraction" autocomplete="off">
-                        <label class="btn btn-outline-primary" for="btn-check-outlined">-</label><br>
-
-                        <input type="checkbox" class="btn-check" id="multiplication" autocomplete="off">
-                        <label class="btn btn-outline-primary" for="btn-check-outlined">×</label><br>
-
-                        <input type="checkbox" class="btn-check" id="division" autocomplete="off">
-                        <label class="btn btn-outline-primary" for="btn-check-outlined">÷</label><br>
-
+                    <div class="operator-grid">
+                        <div>
+                            <input type="checkbox" class="btn-check" id="addition" autocomplete="off">
+                            <label class="btn btn-outline-primary" for="addition">+</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="btn-check" id="subtraction" autocomplete="off">
+                            <label class="btn btn-outline-primary" for="subtraction">-</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="btn-check" id="multiplication" autocomplete="off">
+                            <label class="btn btn-outline-primary" for="multiplication">×</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="btn-check" id="division" autocomplete="off">
+                            <label class="btn btn-outline-primary" for="division">÷</label>
+                        </div>
                     </div>
+                    
                     <button type="submit" class="btn btn-primary">Start Quiz</button>
                 </div>
             </form>
