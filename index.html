@@ -87,6 +87,10 @@
                 <figure class="mb-3">
                     <h1 class="display-4" id="equation"></h1>
                 </figure>
+                <!-- New Elements for Time and Answer Correctness -->
+                <div id="answerStatus" class="mb-3"></div> <!-- To display if the answer is correct or incorrect -->
+                <div id="elapsedTimeDisplay" class="mb-3"></div> <!-- To display the elapsed time -->
+            </div>
                 <div id="progress" class="mb-3"></div>
                 <form id="quizForm">
                     <div class="mb-3">
@@ -124,6 +128,11 @@
         return timeElapsed;
     }
 
+    // Function to update time and show on page
+    function updateTime() {
+        const elapsedTime = getElapsedTime();
+        document.getElementById('elapsedTimeDisplay').innerText = `Time: ${elapsedTime} seconds`;
+    }
     // Function to toggle transparency mode
     document.getElementById('transparencyToggle').addEventListener('click', function() {
         transparencyMode = !transparencyMode; // Toggle the state
@@ -191,7 +200,7 @@
             alert("Please choose at least one operator.");
             return;
         }
-
+        setInterval(updateTime, 1000);
         showPage('quizPage');
         generateEquation();
 
@@ -206,6 +215,10 @@
     document.getElementById('quizForm').addEventListener('submit', function(event) {
         event.preventDefault();
         const userAnswer = parseFloat(document.getElementById('answer').value);
+        // Update answer status
+        const answerStatus = (userAnswer === currentAnswer) ? "Correct" : "Incorrect";
+        document.getElementById('answerStatus').innerText = `Your answer is ${answerStatus}.`;
+
         if (userAnswer === currentAnswer) {
             correctAnswers++;
         }
