@@ -21,17 +21,18 @@ if (document.getElementById('startForm')) {
     document.getElementById('startForm').addEventListener('submit', function(event) {
         event.preventDefault();
         totalQuestions = parseInt(document.getElementById('numQuestions').value);
-        // Redirect to the quiz page
-        window.location.href = 'quiz.html';
+        localStorage.setItem('totalQuestions', totalQuestions);  // Store in localStorage
+        window.location.href = 'quiz.html';  // Full path in GitHub Pages
     });
 }
 
 // Quiz Page
 if (document.getElementById('quizForm')) {
-    window.onload = function() {
+    window.addEventListener('load', function() {
+        totalQuestions = localStorage.getItem('totalQuestions');  // Retrieve from localStorage
         generateEquation();
         document.getElementById('answer').focus();
-    };
+    });
 
     document.getElementById('quizForm').addEventListener('submit', function(event) {
         event.preventDefault();
