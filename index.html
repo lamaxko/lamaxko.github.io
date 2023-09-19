@@ -6,6 +6,9 @@
     <title>Math Quiz</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        .btn-outline-primary {
+            color: #0d6efd !important;
+        }        
         .full-height {
         height: 100vh;
         display: flex;
@@ -166,14 +169,16 @@
         document.getElementById('elapsedTimeDisplay').style.display = displayStyle;
 
         toggleExtraInfo(); // Update the visibility of the extra information
+        
         if (transparencyMode) {
-            this.classList.remove("btn-outline-secondary");
+            this.classList.remove("btn-outline-primary"); // Assuming the button starts with this class
             this.classList.add("btn-outline-success");  // Changed color when enabled
         } else {
             this.classList.remove("btn-outline-success");  // Revert to original
-            this.classList.add("btn-outline-primary");
+            this.classList.add("btn-outline-primary"); // Reverting back to the initial class
         }
     });
+
 
 
     function showPage(pageId) {
@@ -250,14 +255,14 @@
             const answerStatus = (userAnswer === currentAnswer) ? "Correct" : "Incorrect";
             document.getElementById('answerStatus').innerText = `Your answer is ${answerStatus}.`;
         }
-
-        if (userAnswer === currentAnswer) {
-            correctAnswers++;
-        }
         if (transparencyMode) {
             const elapsedTime = getElapsedTime();
             const correct = (userAnswer === currentAnswer) ? "Correct" : "Incorrect";
         }
+        if (userAnswer === currentAnswer) {
+            correctAnswers++;
+        }
+
         counter++;
         document.getElementById('progress').innerText = `${counter}/${totalQuestions}`;
         if (counter < totalQuestions) {
